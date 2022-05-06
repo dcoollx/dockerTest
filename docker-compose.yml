@@ -1,0 +1,18 @@
+version: "3.7"
+services:    #containers
+  app:
+    image: node:16-alpine
+    command: sh -c "npm ci && npm run start"
+    ports:
+     - 3000:8000
+    working_dir: /app
+    volumes:
+     - ./:/app
+  db:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: username # The PostgreSQL user (useful to connect to the database)
+      POSTGRES_PASSWORD: password # The PostgreSQL password (useful to connect to the database)
+      POSTGRES_DB: default_database # The PostgreSQL default database (automatically created at first launch)
